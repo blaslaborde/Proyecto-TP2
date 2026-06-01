@@ -1,8 +1,10 @@
-const express = require('express'); 
+import express from "express"
+import sequelize from "./connection/connection.js";
+ 
 const app = express(); 
 
 app.get('/',(req,res) =>{
-    res.send("Hola soy blas")
+    res.send("Hola soy blas :)")
 });
 
 const PORT = process.env.PORT || 8000; 
