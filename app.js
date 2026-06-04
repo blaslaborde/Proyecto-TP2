@@ -1,19 +1,17 @@
-import express from "express"
-import sequelize from "./connection/connection.js";
-import "./Models/index.js"; 
+import express from 'express'
+import sequelize from './connection/connection.js'
+import './Models/index.js'
 
-const app = express(); 
+const app = express()
 
-app.get('/',(req,res) =>{
-    res.send("Hola soy blas :)")
-});
+app.get('/', (req, res) => {
+  res.send('Hola soy blas :)')
+})
 
+await sequelize.sync({ force: true })
 
-await sequelize.sync({force:true})
-
-
-const PORT = process.env.PORT || 8000; 
+const PORT = process.env.PORT || 8000
 app.listen(PORT, () => {
-  console.log(`Servidor Express escuchando en el puerto ${PORT}`);
-  console.log(`Accede en: http://localhost:${PORT}`);
-});
+  console.log(`Servidor Express escuchando en el puerto ${PORT}`)
+  console.log(`Accede en: http://localhost:${PORT}`)
+})
