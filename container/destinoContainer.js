@@ -1,5 +1,8 @@
-import DestinoController from '../controllers/DestinoController'
+import {Destino} from '../Models/index.js'
+import DestinoController from '../controllers/DestinoController.js'
+import DestinoService from '../services/destinoService.js'
 
-const destinoController = new DestinoController()
+const destinoService = new DestinoService(Destino)
+const destinoController = new DestinoController(destinoService)
 
 export default destinoController

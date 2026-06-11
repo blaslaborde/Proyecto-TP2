@@ -3,9 +3,9 @@ class DestionoService {
     this.destino = destino
   }
 
-  getDestinoById = async (nombre) => {
+  getDestinoById = async (id) => {
     const destino = await this.destino.findOne({
-      where: { nombre },
+      where: { id: parseInt(id) },
       attributes: [
         'nombre',
         'pais',

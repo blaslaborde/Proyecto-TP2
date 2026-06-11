@@ -1,6 +1,8 @@
 import { User } from '../Models/index.js'
+import UserService from '../services/userService.js'
 import UserController from '../controllers/userController.js'
 
-const userController = new UserController()
+const userService = new UserService(User)
+const userController = new UserController(userService)
 
 export default userController

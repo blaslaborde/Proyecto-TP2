@@ -1,11 +1,11 @@
 import { Router } from 'express'
-import reservaController from './container/reservaCointainer'
+import reservaController from '../container/reservaContainer.js'
 
 const reservaRoutes = Router()
 
 reservaRoutes.get('/:id', reservaController.getReservaById)
-reservaRoutes.post('/', reservaController.createResrva)
+reservaRoutes.post('/', reservaController.createReserva)
 reservaRoutes.put('/:id', reservaController.updateReserva)
 reservaRoutes.delete('/:id', reservaController.deleteReserva)
 
-export default userRoutes
+export default reservaRoutes

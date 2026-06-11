@@ -1,5 +1,5 @@
 class DestinoController {
-  constructor(DestinoService) {
+  constructor(destinoService) {
     this.destinoService = destinoService
   }
 
@@ -14,6 +14,7 @@ class DestinoController {
   }
 
   createDestino = async (req, res) => {
+    console.log("req", req.body)
     try {
       const {
         nombre,

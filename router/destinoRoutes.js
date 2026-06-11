@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import destinoController from '../container/destinoContainer'
+import destinoController from '../container/destinoContainer.js'
 
 const destinoRoutes = Router()
 

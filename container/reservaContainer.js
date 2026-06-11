@@ -1,6 +1,8 @@
 import { Reserva } from '../Models/index.js'
-import reservaController from '../controllers/ReservaController.js'
+import ReservaService from '../services/reservaService.js'
+import ReservaController from '../controllers/ReservaController.js'
 
-const reservaController = new reservaController()
+const reservaService = new ReservaService(Reserva)
+const reservaController = new ReservaController(reservaService)
 
 export default reservaController

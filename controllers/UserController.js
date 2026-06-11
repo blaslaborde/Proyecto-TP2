@@ -13,9 +13,11 @@ class UserController {
     }
   }
   createUser = async (req, res) => {
+     console.log("req", req.body)
     try {
-      const { name, email, password } = req.body
-      const user = await this.userService.createUser({ name, email, password })
+      const { username, email, password } = req.body
+     
+      const user = await this.userService.createUser({ username, email, password })
       res.status(200).send({ success: true, message: user })
     } catch (error) {
       res.status(400).send({ success: false, message: error.message })
@@ -27,7 +29,7 @@ class UserController {
       const { name, email, password } = req.body
       const user = await this.userService.updateUser({
         id,
-        name,
+        username,
         email,
         password,
       })
