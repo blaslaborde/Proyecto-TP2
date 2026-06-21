@@ -42,6 +42,8 @@ class DestionoService {
     return destino
   }
   updateDestino = async ({
+    id,
+    nombre,
     pais,
     descripcion,
     imagen,
@@ -50,16 +52,25 @@ class DestionoService {
     fechaPartida,
     duracion,
   }) => {
-    const destino = await this.destino.update(
-      { pais, descripcion, imagen, precio, cupoMaximo, fechaPartida, duracion },
-      {
-        where: { nombre },
-      },
-    )
+    const destino = await this.destino.findOne({ where: { id } })
+    if (!destino) {
+      return null
+    }
+
+    await destino.update({
+      nombre,
+      pais,
+      descripcion,
+      imagen,
+      precio,
+      cupoMaximo,
+      fechaPartida,
+      duracion,
+    })
     return destino
   }
-  deleteDestino = async (nombre) => {
-    return await this.destino.destroy({ where: { nombre } })
+  deleteDestino = async (id) => {
+    return await this.destino.destroy({ where: { id } })
   }
 }
 

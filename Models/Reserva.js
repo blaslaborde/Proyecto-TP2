@@ -7,14 +7,12 @@ Reserva.init(
   {
     numeroDeReserva: {
       type: DataTypes.INTEGER,
-      unique: true,
+      primaryKey: true,
+      autoIncrement: true,
       allowNull: false,
-      isInt: {
-        msg: 'El número de reserva debe ser un número entero',
-      },
-      min: {
-        args: [1],
-        msg: 'El número de reserva debe ser mayor a 0',
+      validate: {
+        isInt: { msg: 'El número de reserva debe ser un número entero' },
+        min: { args: [1], msg: 'El número de reserva debe ser mayor a 0' },
       },
     },
     fechaInicio: {
