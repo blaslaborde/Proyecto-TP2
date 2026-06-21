@@ -18,7 +18,7 @@ class UserController {
       const { username, email, password } = req.body
      
       const user = await this.userService.createUser({ username, email, password })
-      res.status(200).send({ success: true, message: user })
+      res.status(200).send({ success: true, message: `Usuario ${user.username} fue creado exitosamente`})
     } catch (error) {
       res.status(400).send({ success: false, message: error.message })
     }
@@ -26,7 +26,7 @@ class UserController {
   updateUser = async (req, res) => {
     try {
       const { id } = req.params
-      const { name, email, password } = req.body
+      const { username, email, password } = req.body
       const user = await this.userService.updateUser({
         id,
         username,
@@ -44,6 +44,16 @@ class UserController {
       const user = await this.userService.deleteUser(id)
       res.status(200).send({ success: true, message: user })
     } catch (error) {
+      res.status(400).send({ success: false, message: error.message })
+    }
+  }
+
+  login = async (req,res) =>{
+    try{
+      const { email, password } = req.body
+      const user = await this.userService.login({ email, password })
+      res.status(200).send({ success: true, message: "Login exitoso" })
+    } catch (error){
       res.status(400).send({ success: false, message: error.message })
     }
   }

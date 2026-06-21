@@ -1,7 +1,12 @@
 import { DataTypes, Model } from 'sequelize'
 import sequelize from '../connection/connection.js'
+import bcrypt from 'bcrypt'
 
-class User extends Model {}
+class User extends Model {
+  validatePassword = async (password) =>{
+    return await bcrypt.compare(password, this.password)
+  }
+}
 
 User.init(
   {
@@ -44,7 +49,7 @@ User.init(
           msg: 'La contraseña debe tener al menos 8 caracteres',
         },
         isStrongPassword(value) {
-          const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/
+          const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,;:¿¡|]).+$/
 
           if (!regex.test(value)) {
             throw new Error(
@@ -60,5 +65,16 @@ User.init(
     modelName: 'User',
   },
 )
+
+const hashPassword = async (user) => {
+  if (user.changed('password')) {
+    const salt = await bcrypt.genSalt(10)
+    user.password = await bcrypt.hash(user.password, salt)
+  }
+}
+
+User.beforeCreate(hashPassword)
+User.beforeUpdate(hashPassword)
+
 
 export default User

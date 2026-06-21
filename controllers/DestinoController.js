@@ -14,7 +14,7 @@ class DestinoController {
   }
 
   createDestino = async (req, res) => {
-    console.log("req", req.body)
+    console.log('req', req.body)
     try {
       const {
         nombre,
@@ -46,6 +46,7 @@ class DestinoController {
 
   updateDestino = async (req, res) => {
     try {
+      const { id } = req.params
       const {
         nombre,
         pais,
@@ -57,7 +58,8 @@ class DestinoController {
         duracion,
       } = req.body
 
-      const destino = {
+      const destinoUpdated = await this.destinoService.updateDestino({
+        id,
         nombre,
         pais,
         descripcion,
@@ -66,9 +68,14 @@ class DestinoController {
         cupoMaximo,
         fechaPartida,
         duracion,
+      })
+
+      if (!destinoUpdated) {
+        return res
+          .status(404)
+          .send({ success: false, message: 'Destino no encontrado' })
       }
 
-      const destinoUpdated = await this.destinoService.updateDestino(destino)
       res.status(200).send({ success: true, message: destinoUpdated })
     } catch (error) {
       res.status(400).send({ success: false, message: error.message })

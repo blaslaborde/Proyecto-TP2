@@ -2,16 +2,17 @@ import express from 'express'
 import sequelize from './connection/connection.js'
 import './Models/index.js'
 import router from './router/router.js';
+import { SERVER_PORT, SERVER_HOST} from './config/config.js';
 
 const app = express()
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json())
-await sequelize.sync({ force: true })
+await sequelize.sync({ alter: true })
 
 app.use(router);
-const PORT = process.env.PORT || 8000
+const PORT = SERVER_PORT || 8080
 app.listen(PORT, () => {
   console.log(`Servidor Express escuchando en el puerto ${PORT}`)
-  console.log(`Accede en: http://localhost:${PORT}`)
+  console.log(`Accede en: ${SERVER_HOST}:${PORT}`)
 })

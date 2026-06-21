@@ -21,7 +21,10 @@ Destino.init(
     },
     descripcion: {
       type: DataTypes.TEXT,
-      allowNull: true,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: 'La descripcion no puede estar vacia' },
+      },
     },
     imagen: {
       type: DataTypes.STRING,
