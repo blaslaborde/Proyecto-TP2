@@ -5,8 +5,11 @@ class ReservaController {
   getReservaByNumeroDeReserva = async (req, res) => {
     try {
       const { numeroDeReserva } = req.params
-      const reserva =
-        await this.reservaService.getReservaByNumeroDeReserva(numeroDeReserva)
+      const userId = req.user.id
+      const reserva = await this.reservaService.getReservaByNumeroDeReserva({
+        numeroDeReserva,
+        userId,
+      })
       if (!reserva) {
         return res
           .status(404)
@@ -19,7 +22,8 @@ class ReservaController {
   }
   createReserva = async (req, res) => {
     try {
-      const { cantPersonas, destinoId, userId } = req.body
+      const { cantPersonas, destinoId } = req.body
+      const userId = req.user.id
       const reserva = await this.reservaService.createReserva({
         cantPersonas,
         destinoId,
@@ -34,9 +38,11 @@ class ReservaController {
     try {
       const { numeroDeReserva } = req.params
       const { cantPersonas } = req.body
+      const userId = req.user.id
       const reserva = await this.reservaService.updateReserva({
         numeroDeReserva,
         cantPersonas,
+        userId,
       })
       if (!reserva) {
         return res
@@ -51,7 +57,11 @@ class ReservaController {
   deleteReserva = async (req, res) => {
     try {
       const { numeroDeReserva } = req.params
-      const deleted = await this.reservaService.deleteReserva(numeroDeReserva)
+      const userId = req.user.id
+      const deleted = await this.reservaService.deleteReserva({
+        numeroDeReserva,
+        userId,
+      })
       if (!deleted) {
         return res
           .status(404)

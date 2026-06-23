@@ -7,12 +7,14 @@ class DestionoService {
     const destino = await this.destino.findOne({
       where: { id: parseInt(id) },
       attributes: [
+        'id',
         'nombre',
         'pais',
         'descripcion',
         'imagen',
         'precio',
         'cupoMaximo',
+        'cupoOcupado',
         'fechaPartida',
         'duracion',
       ],
@@ -71,6 +73,25 @@ class DestionoService {
   }
   deleteDestino = async (id) => {
     return await this.destino.destroy({ where: { id } })
+  }
+
+  reservarCupo = async (id, cantidad) => {
+    const destino = await this.destino.findOne({ where: { id } })
+    if (!destino) throw new Error('Destino no encontrado')
+
+    const disponible = destino.cupoMaximo - destino.cupoOcupado
+    if (cantidad > disponible) {
+      throw new Error(`Cupo insuficiente. Disponible: ${disponible}`)
+    }
+
+    await destino.increment('cupoOcupado', { by: cantidad })
+  }
+
+  liberarCupo = async (id, cantidad) => {
+    await this.destino.decrement('cupoOcupado', {
+      by: cantidad,
+      where: { id },
+    })
   }
 }
 

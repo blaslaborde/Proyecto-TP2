@@ -76,5 +76,4 @@ const hashPassword = async (user) => {
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)
 
-
 export default User

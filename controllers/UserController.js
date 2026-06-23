@@ -51,7 +51,8 @@ class UserController {
   login = async (req,res) =>{
     try{
       const { email, password } = req.body
-      const user = await this.userService.login({ email, password })
+      const token = await this.userService.login({ email, password })
+      res.cookie("token", token);
       res.status(200).send({ success: true, message: "Login exitoso" })
     } catch (error){
       res.status(400).send({ success: false, message: error.message })

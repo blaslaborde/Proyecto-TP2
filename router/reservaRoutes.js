@@ -5,8 +5,11 @@ import {
   validateUpdateReserva,
 } from '../middelware/reservaValidation.js'
 import reservaController from '../container/reservaContainer.js'
+import { authRequired } from '../middelware/auth.js'
 
 const reservaRoutes = Router()
+
+reservaRoutes.use(authRequired)
 
 reservaRoutes.get(
   '/:numeroDeReserva',

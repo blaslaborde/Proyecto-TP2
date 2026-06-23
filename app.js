@@ -1,4 +1,5 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import sequelize from './connection/connection.js'
 import './Models/index.js'
 import router from './router/router.js';
@@ -8,6 +9,7 @@ const app = express()
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json())
+app.use(cookieParser())
 await sequelize.sync({ alter: true })
 
 app.use(router);
