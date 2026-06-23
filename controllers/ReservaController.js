@@ -6,6 +6,7 @@ class ReservaController {
     try {
       const { numeroDeReserva } = req.params
       const userId = req.user.id
+      console.log(userId)
       const reserva = await this.reservaService.getReservaByNumeroDeReserva({
         numeroDeReserva,
         userId,
