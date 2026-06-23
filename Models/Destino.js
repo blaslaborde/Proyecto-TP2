@@ -49,6 +49,14 @@ Destino.init(
         min: { args: [1], msg: 'El cupo debe ser al menos 1' },
       },
     },
+    cupoOcupado: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+      validate: {
+        min: { args: [0], msg: 'El cupo ocupado no puede ser negativo' },
+      },
+    },
     fechaPartida: {
       type: DataTypes.DATE,
       allowNull: false,

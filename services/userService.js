@@ -1,3 +1,5 @@
+import { generateToken } from '../utils/jwt.js'
+
 class UserService {
   constructor(user) {
     this.user = user
@@ -40,12 +42,15 @@ class UserService {
 
     const validPassword = await user.validatePassword(password)
     if (!validPassword) throw new Error('Invalid password')
-
-    return {
+    
+    const payload = {
       id: user.id,
       username: user.username,
-      email: user.email,
-    }
+      email: user.email
+    };
+
+    const token = generateToken(payload);
+    return token;
   }
 }
 
