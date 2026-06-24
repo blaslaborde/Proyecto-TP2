@@ -8,7 +8,7 @@ Rutas de la API:
 - /reservas
 
 Instrucciones para inicializar la aplicacion:
-- Paso 1: Desplegar la base datos con la apliacion XAMP/MAMP con los puertos Apache 80,443 y MySQL 3036
+- Paso 1: Crear la base datos llamada "odyssey" desde el Admin de MySQL con la apliacion XAMP/MAMP en los puertos Apache 80,443 y MySQL 3036
 - Paso 2: Levantar el servidor con el comando npm run dev
 - Paso 3: Abrir ThunderClient y hacer un post en la ruta /usuarios para crear un usuario admin que va a ser el encargado de crear los destinos para que los usuarios puedan verlos. (Cualquier usuario puede crearlos, pero para que quede centrada la funcionalidad en un usuario)
 - Paso 4: Hacer un post en /usuarios/login para iniciar sesion con los parametros de email y password
